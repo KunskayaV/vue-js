@@ -13,10 +13,10 @@ withDefaults(
 
 <style scoped>
 .result-count {
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 1em;
-  font-weight: 600;
-  line-height: 1.5em;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  line-height: 1.5;
   color: #ffffff;
 }
 </style>

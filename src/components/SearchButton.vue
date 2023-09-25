@@ -10,23 +10,16 @@ const props = defineProps<{
   size?: 'small' | 'medium' | 'large'
 }>()
 
-const emit = defineEmits<{
-  (e: 'click', id: number): void
-}>()
-
 const classes = computed(() => ({
   'search-button': true,
   [`search-button--${props.size || 'medium'}`]: true
 }))
 
-const onClick = () => {
-  emit('click', 1)
-}
 </script>
 
 <style scoped>
 .search-button {
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.8px;
   border: 0;
@@ -39,15 +32,15 @@ const onClick = () => {
   color: #ffffff;
 }
 .search-button--small {
-  font-size: 12px;
+  font-size: 0.75rem;
   padding: 10px 16px;
 }
 .search-button--medium {
-  font-size: 14px;
+  font-size: 0.875rem;
   padding: 11px 24px;
 }
 .search-button--large {
-  font-size: 16px;
+  font-size: 1rem;
   padding: 12px 36px;
 }
 </style>

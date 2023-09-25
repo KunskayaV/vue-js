@@ -56,7 +56,6 @@ const value = computed({
 }
 
 .switcher-title {
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   color: #ffffff;
 }
@@ -66,7 +65,7 @@ const value = computed({
   display: inline-block;
   padding-block: 8px;
   padding-inline: 16px;
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
   color: #ffffff;
   text-transform: uppercase;
   background-color: #424242;

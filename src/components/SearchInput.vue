@@ -5,46 +5,32 @@
     name="search"
     class="search-input"
     placeholder="Search..."
-    v-model.trim="value"
-    @keyup.enter="handleSearch"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event?.target?.value || '')"
   />
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 
-const props = withDefaults(
+ withDefaults(
   defineProps<{
     label?: string
-    searchTextValue?: string
+    modelValue?: string
   }>(),
-  { label: '', searchTextValue: '' }
+  { label: '' }
 )
 
-const emit = defineEmits<{
-  'update:searchTextValue': [text: string]
-  submit: [value: string]
+defineEmits<{
+  'update:modelValue': [text: string]
 }>()
 
-const value = computed({
-  get() {
-    return props.searchTextValue
-  },
-  set(value: string) {
-    emit('update:searchTextValue', value)
-  }
-})
-
-const handleSearch = (event: Event) => {
-  emit('submit', (event.target as HTMLInputElement).value)
-}
 </script>
 
 <style scoped>
 .search-input {
   width: 100%;
   padding: 12px;
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
   color: #ffffff;
   background-color: rgba(28, 28, 28, 0.9);
   border-radius: 4px;
@@ -54,7 +40,7 @@ const handleSearch = (event: Event) => {
 .search-input-label {
   margin-bottom: 4px;
   display: inline-block;
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
   color: #ffffff;
   text-transform: uppercase;
 }

@@ -17,11 +17,10 @@ const year = computed(() => new Date(props.date).getFullYear())
   display: inline-block;
   padding-block: 4px;
   padding-inline: 8px;
-  border: 1px #555555 solid;
+  border: 1px #bdbdbd solid;
   border-radius: 2px;
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 0.8em;
-  line-height: 1em;
+  font-size: 0.8rem;
+  line-height: 1;
   color: #bdbdbd;
 }
 </style>
