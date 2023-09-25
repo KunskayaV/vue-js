@@ -6,13 +6,12 @@
     class="search-input"
     placeholder="Search..."
     :value="modelValue"
-    @input="$emit('update:modelValue', $event?.target?.value || '')"
+    @input="$emit('update:modelValue', ($event?.target as HTMLInputElement)?.value || '')"
   />
 </template>
 
 <script lang="ts" setup>
-
- withDefaults(
+withDefaults(
   defineProps<{
     label?: string
     modelValue?: string
@@ -23,7 +22,6 @@
 defineEmits<{
   'update:modelValue': [text: string]
 }>()
-
 </script>
 
 <style scoped>

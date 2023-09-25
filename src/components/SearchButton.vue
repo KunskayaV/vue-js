@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :class="classes" @click="onClick">{{ label }}</button>
+  <button type="button" :class="classes">{{ label }}</button>
 </template>
 
 <script lang="ts" setup>
@@ -14,7 +14,6 @@ const classes = computed(() => ({
   'search-button': true,
   [`search-button--${props.size || 'medium'}`]: true
 }))
-
 </script>
 
 <style scoped>

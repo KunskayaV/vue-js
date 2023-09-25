@@ -9,39 +9,37 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
-import type { TMovie } from '@/types';
+import type { TMovie } from '@/types'
 
 defineProps<{
-  items: TMovie[];
-}>();
-
+  items: TMovie[]
+}>()
 </script>
 
 <style scoped>
-  .results-list {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    row-gap: 32px;
-    column-gap: 32px;
-    background-color: #232323;
-    padding: 32px;
-  }
+.results-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 32px;
+  column-gap: 32px;
+  background-color: #232323;
+  padding: 32px;
+}
 
-  .results-empty {
-    display: flex;
-    min-height: 200px;
-    justify-content: center;
-    align-items: center;
-    background-color: #232323;
-  }
+.results-empty {
+  display: flex;
+  min-height: 200px;
+  justify-content: center;
+  align-items: center;
+  background-color: #232323;
+}
 
-  .results-empty-text {
-    font-size: 1.5;
-    font-weight: 500;
-    color: #FFFFFF;
-  }
+.results-empty-text {
+  font-size: 1.5;
+  font-weight: 500;
+  color: #ffffff;
+}
 </style>

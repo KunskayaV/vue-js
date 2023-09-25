@@ -7,8 +7,7 @@ const meta = {
   component: SearchButton,
   tags: ['autodocs'],
   argTypes: {
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
-    onClick: { action: 'clicked' }
+    size: { control: 'select', options: ['small', 'medium', 'large'] }
   }
 } satisfies Meta<typeof SearchButton>
 

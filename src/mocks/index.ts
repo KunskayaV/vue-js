@@ -1,4 +1,4 @@
-import type { TMovie } from "@/types";
+import type { TMovie } from '@/types'
 
 export const mockedSearchByItems = [
   {
@@ -11,7 +11,7 @@ export const mockedSearchByItems = [
     value: 'genre',
     label: 'Genre'
   }
-];
+]
 
 export const mockedSortItems = [
   {
@@ -24,7 +24,7 @@ export const mockedSortItems = [
     value: 'rating',
     label: 'Rating'
   }
-];
+]
 
 export const mockedMovieItems: TMovie[] = [
   {
@@ -34,8 +34,8 @@ export const mockedMovieItems: TMovie[] = [
     description: 'some long movie',
     shortDescription: 'some movie',
     genre: 'Action & Adventure',
-    date: "2004-12-22",
-    rating: 12,
+    date: '2004-12-22',
+    rating: 12
   },
   {
     id: 2,
@@ -44,8 +44,8 @@ export const mockedMovieItems: TMovie[] = [
     description: 'some long movie',
     shortDescription: 'some movie',
     genre: 'Action & Adventure',
-    date: "2003-12-22",
-    rating: 1,
+    date: '2003-12-22',
+    rating: 1
   },
   {
     id: 3,
@@ -54,8 +54,8 @@ export const mockedMovieItems: TMovie[] = [
     description: 'some long movie',
     shortDescription: 'some movie',
     genre: 'Oscar winning movie',
-    date: "1994-12-22",
-    rating: 9,
+    date: '1994-12-22',
+    rating: 9
   },
   {
     id: 4,
@@ -64,8 +64,8 @@ export const mockedMovieItems: TMovie[] = [
     description: 'some long movie',
     shortDescription: 'some movie',
     genre: 'Action & Adventure',
-    date: "2004-12-22",
-    rating: 8,
+    date: '2004-12-22',
+    rating: 8
   },
   {
     id: 5,
@@ -74,8 +74,8 @@ export const mockedMovieItems: TMovie[] = [
     description: 'some long movie',
     shortDescription: 'some movie',
     genre: 'Action & Adventure',
-    date: "2003-12-22",
-    rating: 5,
+    date: '2003-12-22',
+    rating: 5
   },
   {
     id: 6,
@@ -84,7 +84,7 @@ export const mockedMovieItems: TMovie[] = [
     description: 'some long movie',
     shortDescription: 'some movie',
     genre: 'Oscar winning movie',
-    date: "1994-12-22",
-    rating: 2,
-  },
-];
+    date: '1994-12-22',
+    rating: 2
+  }
+]
