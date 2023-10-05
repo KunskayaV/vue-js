@@ -25,7 +25,6 @@ defineProps<{
   flex-wrap: wrap;
   row-gap: 32px;
   column-gap: 32px;
-  background-color: #232323;
   padding: 32px;
 }
 

@@ -2,32 +2,38 @@
   <figure class="poster">
     <img
       class="poster-image"
-      :src="item.posterUrl"
+      :src="posterUrl"
       v-lazyload
-      :alt="item.shortDescription"
+      :alt="item.storyline"
       width="300"
       height="400"
     />
     <figcaption class="info">
       <div class="info-wrapper">
-        <span class="name">{{ item.name }}</span>
-        <span class="genre">{{ item.genre }}</span>
+        <span class="name">{{ item.title }}</span>
+        <span class="genre">{{ genreLine }}</span>
       </div>
-      <ItemReleaseDateVue :date="item.date" />
+      <ItemDate :date="item.releaseDate" />
     </figcaption>
   </figure>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import ItemDate from './ItemDate.vue'
+import { getItemGenreLine } from '@/helpers/getItemGenreLine'
 import type { TMovie } from '@/types'
-import ItemReleaseDateVue from './ItemReleaseDate.vue'
 import type { Directive } from 'vue'
+import { getPosterUrl } from '@/helpers/getPosterUrl'
 
-defineProps<{ item: TMovie }>()
+const props = defineProps<{ item: TMovie }>()
 
 const vLazyload: Directive<HTMLImageElement> = {
   mounted: (el) => el.setAttribute('loading', 'lazy')
 }
+
+const posterUrl = getPosterUrl()
+const genreLine = ref(getItemGenreLine(props.item.genres))
 </script>
 
 <style scoped>

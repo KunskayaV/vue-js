@@ -1,27 +1,13 @@
-import { type Ref, computed, type ComputedRef, ref } from 'vue'
-import type { TMovie } from '@/types'
+import { useMoviesStore } from '@/stores/useMoviesStore'
 
 type TUseSearchResult = {
-  filteredItems: ComputedRef<TMovie[]>
   handleSearch(value: string): void
 }
 
-export function useSearch(items: TMovie[], searchBy: Ref<string>): TUseSearchResult {
-  const searchValue = ref('')
-
-  const handleSearch = (value: string) => {
-    searchValue.value = value
-  }
-  const filteredItems = computed(() => {
-    return items.filter((movie) => {
-      const filterProperty = searchBy.value == 'title' ? 'name' : 'genre'
-
-      return movie[filterProperty].toLowerCase().includes(searchValue.value.toLowerCase())
-    })
-  })
+export function useSearch(): TUseSearchResult {
+  const movieState = useMoviesStore()
 
   return {
-    filteredItems,
-    handleSearch
+    handleSearch: movieState.setSearchValue
   }
 }

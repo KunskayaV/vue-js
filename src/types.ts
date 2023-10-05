@@ -1,10 +1,16 @@
 export type TMovie = {
   id: number
+  year: string
+  genres: string[]
+  ratings: number[]
+  poster: string
+  contentRating: string
+  duration: string
+  releaseDate: string
+  averageRating: number
+  storyline: string
+  actors: string[]
+  imdbRating: number
   posterUrl: string
-  shortDescription: string
-  description: string
-  name: string
-  genre: string
-  date: string
-  rating: number
+  title: string
 }
