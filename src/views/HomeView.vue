@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+withDefaults(defineProps<{ msg: string }>(), { msg: 'This is Home page' })
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <h1>{{ msg }}</h1>
   </main>
 </template>

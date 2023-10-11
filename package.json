@@ -49,5 +49,8 @@
     "vite": "^4.4.9",
     "vitest": "^0.34.2",
     "vue-tsc": "^1.8.8"
+  },
+  "resolutions": {
+    "string-width": "4.2.3"
   }
 }
