@@ -1,7 +1,7 @@
 <template>
   <div class="page-body">
-    <header>
-      <img alt="App logo" class="logo" src="@/assets/logo.png" width="100" height="30" />
+    <header class="home-header">
+      <img alt="App logo" class="logo" src="@/assets/logo.png" width="180" height="25" />
     </header>
     <main>
       <section class="search-block">
@@ -12,73 +12,58 @@
         </form>
         <SwitcherComponent
           title="Search by"
-          :items="searchByItems"
-          v-model:currentValue="searchByValue"
+          :items="searchByFilters"
+          v-model:currentValue="appState.searchByValue"
         />
       </section>
       <section class="sort-bar">
-        <ResultCount :count="searchResultCount" />
-        <SwitcherComponent title="Sort by" :items="sortItems" v-model:currentValue="sortValue" />
+        <ResultCount :count="appState.movies.length" />
+        <SwitcherComponent
+          title="Sort by"
+          :items="sortByItems"
+          v-model:currentValue="appState.sortByValue"
+        />
       </section>
-      <ResultList :items="resultMovies">
-        <template v-slot:item="{ item }">
-          <MovieCard :item="item" />
-        </template>
-      </ResultList>
+      <div class="loading-container" v-if="!appState.isMoviesDataLoaded">
+        <span>LOADING...</span>
+      </div>
+      <div class="movies-list" v-else>
+        <ResultsList :items="appState.movies">
+          <template v-slot:item="{ item }">
+            <MovieCard :item="item" />
+          </template>
+        </ResultsList>
+      </div>
     </main>
-    <footer class="page-footer">
-      <img alt="Footer logo" class="logo" src="@/assets/logo.png" width="100" height="30" />
-    </footer>
+    <PageFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 
 import SearchButton from '@/components/SearchButton.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import SwitcherComponent from '@/components/SwitcherComponent.vue'
 import ResultCount from '@/components/ResultCount.vue'
-import ResultList from '@/components/ResultList.vue'
+import ResultsList from '@/components/ResultsList.vue'
 import MovieCard from '@/components/MovieCard.vue'
+import PageFooter from '@/components/PageFooter.vue'
 import { useSearch } from '@/composables'
-
-import { mockedSearchByItems, mockedSortItems, mockedMovieItems } from '@/mocks/index'
+import { useMoviesStore } from '@/stores/useMoviesStore'
+import { searchByFilters, sortByItems } from '@/constants'
 
 withDefaults(defineProps<{ msg: string }>(), { msg: 'Find your movie' })
 
-const searchByItems = mockedSearchByItems
-const sortItems = mockedSortItems
-const movies = mockedMovieItems
-
+const appState = useMoviesStore()
 const searchText = ref('')
-const searchByValue = ref(searchByItems[0].value)
-const sortValue = ref(sortItems[0].value)
 
-const { handleSearch, filteredItems } = useSearch(movies, searchByValue)
+onMounted(() => {
+  appState.getMoviesData()
+})
+
+const { handleSearch } = useSearch()
 const onSearch = () => handleSearch(searchText.value)
-
-const resultMovies = computed(() => {
-  return [...filteredItems.value].sort((a, b) => {
-    const property = sortValue.value == 'rating' ? 'rating' : 'date'
-
-    if (a[property] < b[property]) {
-      return 1
-    } else {
-      return -1
-    }
-  })
-})
-
-const searchResultCount = computed(() => resultMovies.value.length)
-
-watch(searchByValue, (newValue, oldValue) => {
-  if (newValue !== oldValue) {
-    searchText.value = ''
-  }
-
-  onSearch()
-})
 </script>
 
 <style scoped>
@@ -91,10 +76,12 @@ watch(searchByValue, (newValue, oldValue) => {
   padding: 0;
 }
 
-header {
+.home-header {
   display: flex;
   justify-content: flex-start;
   background-color: #030303;
+  padding-top: 20px;
+  padding-inline: 5%;
 }
 
 .page-header {
@@ -131,9 +118,18 @@ header {
   padding-inline: 10%;
 }
 
-.page-footer {
+.loading-container {
   display: flex;
   justify-content: center;
-  padding-block: 24px;
+  padding-top: 5%;
+  height: 20%;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: 1.5;
+  color: white;
+}
+
+.movies-list {
+  background-color: #232323;
 }
 </style>

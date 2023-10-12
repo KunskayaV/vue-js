@@ -4,16 +4,14 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-
 const props = defineProps<{
   date: string
 }>()
-
 const year = computed(() => new Date(props.date).getFullYear())
 </script>
 
 <style scoped>
-.item-release-date {
+.date {
   display: inline-block;
   padding-block: 4px;
   padding-inline: 8px;
