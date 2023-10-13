@@ -1,5 +1,5 @@
 <template>
-  <ul class="results-list" v-if="items.length">
+  <ul data-testid="results-list" class="results-list" v-if="items.length">
     <li v-for="item in items" :key="item.id">
       <slot name="item" :item="item"></slot>
     </li>

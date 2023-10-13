@@ -7,6 +7,7 @@
         class="switcher-label"
         :class="{ 'switcher-label--active': item.value === value }"
         :key="item.value"
+        data-testid="switcher"
       >
         {{ item.label }}
         <input :name="item.name" :value="item.value" type="radio" v-show="false" v-model="value" />

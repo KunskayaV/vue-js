@@ -6,7 +6,7 @@
     <main>
       <section class="search-block">
         <h2 class="page-header">{{ msg }}</h2>
-        <form class="row-wrapper" @submit.prevent="onSearch">
+        <form data-testid="search-form" class="row-wrapper" @submit.prevent="onSearch">
           <SearchInput v-model.trim="searchText" />
           <SearchButton label="Search" @click="onSearch" />
         </form>
@@ -24,7 +24,7 @@
           v-model:currentValue="appState.sortByValue"
         />
       </section>
-      <div class="loading-container" v-if="!appState.isMoviesDataLoaded">
+      <div data-testid="loading-list" class="loading-container" v-if="!appState.isMoviesDataLoaded">
         <span>LOADING...</span>
       </div>
       <div class="movies-list" v-else>

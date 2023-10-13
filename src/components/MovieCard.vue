@@ -10,8 +10,8 @@
     />
     <figcaption class="info">
       <div class="info-wrapper">
-        <span class="name">{{ item.title }}</span>
-        <span class="genre">{{ genreLine }}</span>
+        <span class="name" date-testid="title">{{ item.title }}</span>
+        <span class="genre" date-testid="genre">{{ genreLine }}</span>
       </div>
       <ItemDate :date="item.releaseDate" />
     </figcaption>

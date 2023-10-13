@@ -17,7 +17,7 @@
           :rating="movieDetails.averageRating"
           :genre="getItemGenreLine(movieDetails?.genres)"
         />
-        <MovieDetailsDuration :year="movieDetails.year" :duration="movieDetails.duration" />
+        <MovieDetailsDuration :date="movieDetails.releaseDate" :duration="movieDetails.duration" />
         <p v-if="!!movieDetails.storyline">{{ movieDetails.storyline }}</p>
       </div>
     </div>

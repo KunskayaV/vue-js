@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MovieCard > should match snapshot 1`] = `
+"<figure data-v-8019de98=\\"\\" class=\\"poster\\"><img data-v-8019de98=\\"\\" class=\\"poster-image\\" src=\\"https://loremflickr.com/g/320/240/poster,movie,film?random=567&amp;lock=132\\" alt=\\"Chronicles the experiences of a formerly successful banker as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a crime he did not commit. The film portrays the man's unique way of dealing with his new, torturous life; along the way he befriends a number of fellow prisoners, most notably a wise long-term inmate named Red.                Written by
+J-S-Golden\\" width=\\"300\\" height=\\"400\\" loading=\\"lazy\\">
+  <figcaption data-v-8019de98=\\"\\" class=\\"info\\">
+    <div data-v-8019de98=\\"\\" class=\\"info-wrapper\\"><span data-v-8019de98=\\"\\" class=\\"name\\" date-testid=\\"title\\">The Shawshank Redemption</span><span data-v-8019de98=\\"\\" class=\\"genre\\" date-testid=\\"genre\\">Crime &amp; Drama</span></div><span data-v-3f3ba9c4=\\"\\" data-v-8019de98=\\"\\" class=\\"item-release-date\\">1995</span>
+  </figcaption>
+</figure>"
+`;

@@ -1,0 +1,17 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MovieDetails > should match snapshot with data 1`] = `
+"<div data-v-b1321ac7=\\"\\">
+  <div data-v-b1321ac7=\\"\\" class=\\"movie-details\\"><img data-v-b1321ac7=\\"\\" class=\\"poster-image\\" src=\\"url\\" alt=\\"Chronicles the experiences of a formerly successful banker as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a crime he did not commit. The film portrays the man's unique way of dealing with his new, torturous life; along the way he befriends a number of fellow prisoners, most notably a wise long-term inmate named Red.                Written by
+J-S-Golden\\" width=\\"300\\" height=\\"400\\">
+    <div data-v-b1321ac7=\\"\\" class=\\"movie-description\\">
+      <div data-v-8cdb4aee=\\"\\" data-v-b1321ac7=\\"\\" class=\\"title-container\\">
+        <div data-v-8cdb4aee=\\"\\" class=\\"title-wrapper\\"><span data-v-8cdb4aee=\\"\\" class=\\"movie-title\\" date-testid=\\"details-title\\">The Shawshank Redemption</span><span data-v-8cdb4aee=\\"\\" class=\\"movie-rating\\" date-testid=\\"details-rating\\">0</span></div><span data-v-8cdb4aee=\\"\\" class=\\"movie-genre\\" date-testid=\\"details-genre\\">Crime &amp; Drama</span>
+      </div>
+      <div data-v-b9b942cb=\\"\\" data-v-b1321ac7=\\"\\" class=\\"duration-container\\"><span data-v-b9b942cb=\\"\\" date-testid=\\"details-year\\">1995</span><span data-v-b9b942cb=\\"\\" date-testid=\\"details-duration\\">142 min</span></div>
+      <p data-v-b1321ac7=\\"\\">Chronicles the experiences of a formerly successful banker as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a crime he did not commit. The film portrays the man's unique way of dealing with his new, torturous life; along the way he befriends a number of fellow prisoners, most notably a wise long-term inmate named Red. Written by
+        J-S-Golden</p>
+    </div>
+  </div>
+</div>"
+`;

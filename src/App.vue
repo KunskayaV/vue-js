@@ -4,8 +4,8 @@ import MovieDetailsView from './views/MovieDetailsView.vue'
 </script>
 
 <template>
-  <!-- <HomeView /> -->
-  <MovieDetailsView />
+  <HomeView />
+  <!-- <MovieDetailsView /> -->
 </template>
 
 <style scoped></style>

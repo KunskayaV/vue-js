@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MovieDetailsDuration > should match snapshot 1`] = `"<div data-v-b9b942cb=\\"\\" class=\\"duration-container\\"><span data-v-b9b942cb=\\"\\" date-testid=\\"details-year\\">1995</span><span data-v-b9b942cb=\\"\\" date-testid=\\"details-duration\\">142 min</span></div>"`;
