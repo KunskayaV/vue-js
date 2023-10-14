@@ -30,15 +30,30 @@ import MovieDetailsDuration from './MovieDetailsDuration.vue'
 import { useMoviesStore } from '@/stores/useMoviesStore'
 import { getPosterUrl } from '@/helpers/getPosterUrl'
 import { getItemGenreLine } from '@/helpers/getItemGenreLine'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import type { TMovie } from '@/types'
+import { getMovieById } from '@/api/getMovieById'
 
 // TODO: temp solution for id
 const props = defineProps<{ id: number | undefined }>()
+const movieDetails = ref<TMovie | null | undefined>(null)
+const genre = computed(() => movieDetails?.value?.genres?.[0])
 
 const appState = useMoviesStore()
-const movieDetails = computed(() => props.id && appState.getMovieDetailsById(props.id))
+
+onMounted(async () => {
+  if (props.id) {
+    movieDetails.value = appState.getMovieDetailsById(props.id)
+
+    if (!movieDetails.value) {
+      const data = await getMovieById(props.id)
+      movieDetails.value = data
+    }
+  }
+})
 
 const posterUrl = getPosterUrl()
+defineExpose({ genre })
 </script>
 
 <style scoped>

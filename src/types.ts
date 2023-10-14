@@ -1,3 +1,5 @@
+import { ESortByValues, ESearchByFilter } from './constants'
+
 export type TMovie = {
   id: number
   year: string
@@ -13,4 +15,10 @@ export type TMovie = {
   imdbRating: number
   posterurl: string
   title: string
+}
+
+export type TRequestParams = {
+  sortBy: ESortByValues
+  searchBy: ESearchByFilter
+  filter: string
 }

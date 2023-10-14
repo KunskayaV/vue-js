@@ -6,10 +6,10 @@
     </header>
     <main>
       <div class="wrapper">
-        <MovieDetails :id="movieId" />
+        <MovieDetails ref="detailsInfo" :id="movieId" />
       </div>
-      <div class="details-filter-header">
-        <p>Films by {{ genre }} genre</p>
+      <div v-if="!!detailsInfo?.genre" class="details-filter-header">
+        <p>Films by {{ detailsInfo?.genre }} genre</p>
       </div>
       <div class="wrapper">
         <ResultsList :items="matchMovies">
@@ -24,23 +24,30 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 
 import ResultsList from '@/components/ResultsList.vue'
 import MovieCard from '@/components/MovieCard.vue'
 import PageFooter from '@/components/PageFooter.vue'
 import MovieDetails from '@/components/MovieDetails.vue'
-import { useMoviesStore } from '@/stores/useMoviesStore'
+import type { TMovie } from '@/types'
+import { getMovies } from '@/api'
+import { ESearchByFilter, ESortByValues, MATCH_MOVIES_LENGTH } from '@/constants'
 
-const appState = useMoviesStore()
+const movieId = computed(() => 122)
+const matchMovies = ref<TMovie[]>([])
+const detailsInfo = ref<InstanceType<typeof MovieDetails> | null>(null)
 
-const movieId = computed(() => appState.movies[0]?.id)
-const genre = computed(() => appState.movies[0]?.genres?.[0])
+watchEffect(async () => {
+  if (detailsInfo.value?.genre) {
+    const data = await getMovies({
+      sortBy: ESortByValues.Date,
+      searchBy: ESearchByFilter.Genre,
+      filter: detailsInfo.value.genre
+    })
 
-const matchMovies = computed(() => appState.getMatchMovies(movieId.value))
-
-onMounted(() => {
-  appState.getMoviesData()
+    matchMovies.value = data.slice(0, MATCH_MOVIES_LENGTH)
+  }
 })
 </script>
 

@@ -41,7 +41,6 @@ const genreLine = ref(getItemGenreLine(props.item.genres))
   display: flex;
   flex-direction: column;
   width: 300px;
-  height: 400px;
 }
 
 .poster-image {
@@ -63,6 +62,8 @@ const genreLine = ref(getItemGenreLine(props.item.genres))
 }
 
 .name {
+  flex-wrap: wrap;
+  flex-shrink: 1;
   font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: 1.1px;

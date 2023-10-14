@@ -38,14 +38,15 @@ describe('HomeView', () => {
       cy.get("[data-testid=search-input]").should('have.value', searchText);
     })
   
-    it('should perform filtering on search input enter', () => {
-      cy.wait('@getMovies');
-  
+    it('should perform filtering on search input enter', () => {  
+      cy.wait('@getMovies')
+
       const searchText = 'The Shawshank Redemption';
       cy.get("[data-testid=search-input]").type(searchText).type('{enter}');
-  
-      cy.get('[data-testid=results-list] li').should('have.length', 1);
-  
+
+      cy.wait('@getMovies').then(({ request}) => {
+        expect(request.query.title_like).to.eq(searchText);
+      });
     })
   
     it('should perform filtering on search button click', () => {
@@ -55,11 +56,12 @@ describe('HomeView', () => {
       cy.get("[data-testid=search-input]").type(searchText);
   
       cy.get("[data-testid=search-form] button").click()
-      cy.get('[data-testid=results-list] li').should('have.length', 1);
+
+      cy.wait('@getMovies').then(({ request}) => {
+        expect(request.query.title_like).to.eq(searchText);
+      });
     })
   });
-
-  
 
   it('should display emty state if no movies', () => {
     cy.seedAndVisit([]);
