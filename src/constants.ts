@@ -8,14 +8,17 @@ export const GENRE_PROPERTY = 'genres'
 export const RATING_PROPERTY = 'averageRating'
 export const DATE_PROPERTY = 'year'
 
+export const SEARCH_BY_TYPE = 'searchBy'
+export const SORT_BY_TYPE = 'sortBy'
+
 export const searchByFilters = [
   {
-    name: 'searchBy',
+    name: SEARCH_BY_TYPE,
     value: ESearchByFilter.Title,
     label: 'Title'
   },
   {
-    name: 'searchBy',
+    name: SEARCH_BY_TYPE,
     value: ESearchByFilter.Genre,
     label: 'Genre'
   }
@@ -28,12 +31,12 @@ export enum ESortByValues {
 
 export const sortByItems = [
   {
-    name: 'sortBy',
+    name: SORT_BY_TYPE,
     value: ESortByValues.Date,
     label: 'Release date'
   },
   {
-    name: 'sortBy',
+    name: SORT_BY_TYPE,
     value: ESortByValues.Rating,
     label: 'Rating'
   }

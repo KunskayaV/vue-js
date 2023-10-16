@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import HomeView from './views/HomeView.vue'
-import MovieDetailsView from './views/MovieDetailsView.vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 </script>
 
 <template>
-  <HomeView />
-  <!-- <MovieDetailsView /> -->
+  <router-view :key="route.path"></router-view>
 </template>
-
-<style scoped></style>

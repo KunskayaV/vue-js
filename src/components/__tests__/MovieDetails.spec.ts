@@ -4,7 +4,6 @@ import { setActivePinia, createPinia } from 'pinia'
 import { mount } from '@vue/test-utils'
 import MovieDetails from '@/components/MovieDetails.vue'
 import { mockMovie } from '@/__mocks__'
-import { useMoviesStore } from '@/stores/useMoviesStore'
 import * as api from '@/api'
 import * as urlHelpers from '@/helpers/getPosterUrl'
 import { nextTick } from 'vue'
@@ -30,9 +29,6 @@ describe('MovieDetails', () => {
   })
 
   it.only('should match snapshot with data', async () => {
-    const state = useMoviesStore()
-    await state.getMoviesData()
-
     const wrapper = mount(MovieDetails, { props: { id: mockMovie.id } })
 
     await nextTick()

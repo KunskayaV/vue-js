@@ -5,7 +5,7 @@
     </header>
     <main>
       <section class="search-block">
-        <h2 class="page-header">{{ msg }}</h2>
+        <h2 class="page-header">Find your movie</h2>
         <form data-testid="search-form" class="row-wrapper" @submit.prevent="onSearch">
           <SearchInput v-model.trim="searchText" />
           <SearchButton label="Search" @click="onSearch" />
@@ -14,23 +14,27 @@
           title="Search by"
           :items="searchByFilters"
           v-model:currentValue="appState.searchByValue"
+          @input="handleSearchByChange($event.target.value)"
         />
       </section>
       <section class="sort-bar">
-        <ResultCount :count="appState.movies.length" />
+        <ResultCount :count="movies.length" />
         <SwitcherComponent
           title="Sort by"
           :items="sortByItems"
           v-model:currentValue="appState.sortByValue"
+          @input="handleSortByChange($event.target.value)"
         />
       </section>
-      <div data-testid="loading-list" class="loading-container" v-if="!appState.isMoviesDataLoaded">
+      <div data-testid="loading-list" class="loading-container" v-if="!isMoviesDataLoaded">
         <span>LOADING...</span>
       </div>
       <div class="movies-list" v-else>
-        <ResultsList :items="appState.movies">
+        <ResultsList :items="movies">
           <template v-slot:item="{ item }">
-            <MovieCard :item="item" />
+            <router-link :to="{ name: 'details', params: { id: item.id } }">
+              <MovieCard :item="item" />
+            </router-link>
           </template>
         </ResultsList>
       </div>
@@ -40,7 +44,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, watch, computed, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 import SearchButton from '@/components/SearchButton.vue'
 import SearchInput from '@/components/SearchInput.vue'
@@ -51,21 +56,28 @@ import MovieCard from '@/components/MovieCard.vue'
 import PageFooter from '@/components/PageFooter.vue'
 import { useSearch } from '@/composables'
 import { useMoviesStore } from '@/stores/useMoviesStore'
-import { searchByFilters, sortByItems } from '@/constants'
+import { ESearchByFilter, ESortByValues, searchByFilters, sortByItems } from '@/constants'
+import { useMovies } from '@/composables/useMovies'
+import { SORT_KEY, searchParamsMap, sortParamsMap } from '@/api/constants'
+import { getPartialMatchingParam } from '@/api/helpers'
+import { removeSearchByFromQuery } from '@/router/helpers'
 
-withDefaults(defineProps<{ msg: string }>(), { msg: 'Find your movie' })
+const props = defineProps<{
+  sortQuery: ESortByValues | null
+  searchByQuery: ESearchByFilter | null
+  searchQuery: string
+}>()
 
+const router = useRouter()
+const route = useRoute()
 const appState = useMoviesStore()
-const searchText = ref('')
 
+const { movies, isMoviesDataLoaded, getMoviesData } = useMovies()
+
+const searchText = ref('')
 const searchValue = computed(() => appState.searchValue)
 const searchByValue = computed(() => appState.searchByValue)
 const sortByValue = computed(() => appState.sortByValue)
-onMounted(() => {
-  if (!appState.movies.length) {
-    appState.getMoviesData()
-  }
-})
 
 watch(
   [searchValue, searchByValue, sortByValue],
@@ -73,12 +85,59 @@ watch(
     if (newSearchByValue !== prevSearchByValue && !newSearchValue && !prevSearchValue) {
       return
     }
-    appState.getMoviesData()
+    getMoviesData()
   }
 )
+const handleSearchByChange = (value: ESearchByFilter) => {
+  if (searchValue.value) {
+    router.replace({
+      query: {
+        ...removeSearchByFromQuery(route.query),
+        [getPartialMatchingParam(searchParamsMap[value])]: searchValue.value
+      }
+    })
+  }
+}
+
+const handleSortByChange = (value: ESortByValues) => {
+  router.replace({
+    query: {
+      ...route.query,
+      [SORT_KEY]: sortParamsMap[value]
+    }
+  })
+}
+
+onMounted(() => {
+  if (props.sortQuery && props.sortQuery !== sortByValue.value) {
+    appState.setSortByValue(props.sortQuery)
+  }
+  if (props.searchByQuery && props.searchByQuery !== searchByValue.value) {
+    appState.setSearchByValue(props.searchByQuery)
+  }
+  if (props.searchQuery) {
+    searchText.value = props.searchQuery
+    appState.setSearchValue(props.searchQuery)
+  }
+})
 
 const { handleSearch } = useSearch()
-const onSearch = () => handleSearch(searchText.value)
+const onSearch = () => {
+  handleSearch(searchText.value)
+
+  if (searchText.value) {
+    router.replace({
+      query: {
+        ...route.query,
+        [getPartialMatchingParam(searchParamsMap[searchByValue.value])]: searchText.value
+      }
+    })
+  } else {
+    router.replace({
+      query: removeSearchByFromQuery(route.query)
+    })
+  }
+}
 </script>
 
 <style scoped>
