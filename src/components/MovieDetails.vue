@@ -27,28 +27,27 @@
 <script setup lang="ts">
 import MovieDetailsTitle from './MovieDetailsTitle.vue'
 import MovieDetailsDuration from './MovieDetailsDuration.vue'
-import { useMoviesStore } from '@/stores/useMoviesStore'
 import { getPosterUrl } from '@/helpers/getPosterUrl'
 import { getItemGenreLine } from '@/helpers/getItemGenreLine'
-import { computed, onMounted, ref } from 'vue'
-import type { TMovie } from '@/types'
-import { getMovieById } from '@/api/getMovieById'
+import { computed, watch } from 'vue'
+import { useMovie } from '@/composables/useMovie'
+import { useRoute, useRouter } from 'vue-router'
 
-// TODO: temp solution for id
-const props = defineProps<{ id: number | undefined }>()
-const movieDetails = ref<TMovie | null | undefined>(null)
+const props = defineProps<{ id: number }>()
+
+const router = useRouter()
+const route = useRoute()
+const { movieDetails, error } = useMovie(props.id)
 const genre = computed(() => movieDetails?.value?.genres?.[0])
 
-const appState = useMoviesStore()
-
-onMounted(async () => {
-  if (props.id) {
-    movieDetails.value = appState.getMovieDetailsById(props.id)
-
-    if (!movieDetails.value) {
-      const data = await getMovieById(props.id)
-      movieDetails.value = data
-    }
+watch(error, (newValue) => {
+  if (newValue) {
+    router.replace({
+      name: 'not_found',
+      params: { pathMatch: route.path.split('/').slice(1) },
+      query: route.query,
+      hash: route.hash
+    })
   }
 })
 

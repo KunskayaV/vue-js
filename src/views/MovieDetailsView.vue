@@ -2,7 +2,9 @@
   <div class="details-page-body">
     <header class="details-header">
       <img alt="App logo" class="logo" src="@/assets/logo.png" width="180" height="25" />
-      <img alt="Search" class="search" src="@/assets/search.svg" width="30" height="30" />
+      <router-link to="/">
+        <img alt="Search" class="search" src="@/assets/search.svg" width="30" height="30" />
+      </router-link>
     </header>
     <main>
       <div class="wrapper">
@@ -14,7 +16,9 @@
       <div class="wrapper">
         <ResultsList :items="matchMovies">
           <template v-slot:item="{ item }">
-            <MovieCard :item="item" />
+            <router-link :to="{ name: 'details', params: { id: item.id } }">
+              <MovieCard :item="item" />
+            </router-link>
           </template>
         </ResultsList>
       </div>
@@ -24,17 +28,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 import ResultsList from '@/components/ResultsList.vue'
 import MovieCard from '@/components/MovieCard.vue'
 import PageFooter from '@/components/PageFooter.vue'
 import MovieDetails from '@/components/MovieDetails.vue'
-import type { TMovie } from '@/types'
 import { getMovies } from '@/api'
 import { ESearchByFilter, ESortByValues, MATCH_MOVIES_LENGTH } from '@/constants'
+import type { TMovie } from '@/types'
 
-const movieId = computed(() => 122)
+const props = defineProps<{
+  id: number
+}>()
+
+const movieId = ref(props.id)
 const matchMovies = ref<TMovie[]>([])
 const detailsInfo = ref<InstanceType<typeof MovieDetails> | null>(null)
 
@@ -45,8 +53,9 @@ watchEffect(async () => {
       searchBy: ESearchByFilter.Genre,
       filter: detailsInfo.value.genre
     })
-
-    matchMovies.value = data.slice(0, MATCH_MOVIES_LENGTH)
+    matchMovies.value = data
+      .filter((movie) => movie.id !== movieId.value)
+      .slice(0, MATCH_MOVIES_LENGTH)
   }
 })
 </script>

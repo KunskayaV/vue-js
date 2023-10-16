@@ -1,2 +1,2 @@
-export * from './getMovies'
-export * from './getMovieById'
+export * from './requests/getMovies'
+export * from './requests/getMovieById'
