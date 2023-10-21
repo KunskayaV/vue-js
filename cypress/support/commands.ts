@@ -1,12 +1,12 @@
 /// <reference types="cypress" />
 
-import { MOVIES_URL } from "@/api/constants"
+import { BASE_URL } from "@/api/constants"
 import { TMovie } from "@/types";
 
 Cypress.Commands.add('seedAndVisit', (seedData) => {
   const response = seedData ? { body: seedData } : { fixture: 'movies.json' };
 
-  cy.intercept(MOVIES_URL, response).as('getMovies');
+  cy.intercept(`${BASE_URL}/movies?*`, response).as('getMovies');
   cy.visit('/')
 })
 

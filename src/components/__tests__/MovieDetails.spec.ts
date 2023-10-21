@@ -3,14 +3,15 @@ import { setActivePinia, createPinia } from 'pinia'
 
 import { mount } from '@vue/test-utils'
 import MovieDetails from '@/components/MovieDetails.vue'
-import { mockMoviesResponse } from '@/__mocks__'
+import { mockMovie } from '@/__mocks__'
 import { useMoviesStore } from '@/stores/useMoviesStore'
 import * as api from '@/api'
 import * as urlHelpers from '@/helpers/getPosterUrl'
+import { nextTick } from 'vue'
 
 describe('MovieDetails', () => {
   beforeEach(() => {
-    vi.spyOn(api, 'getMovies').mockResolvedValue(mockMoviesResponse)
+    vi.spyOn(api, 'getMovieById').mockResolvedValue(mockMovie)
     vi.spyOn(urlHelpers, 'getPosterUrl').mockReturnValue('url')
     setActivePinia(createPinia())
   })
@@ -21,7 +22,7 @@ describe('MovieDetails', () => {
 
   it('should match initial empty snapshot', () => {
     const wrapper = mount(MovieDetails, {
-      props: { id: mockMoviesResponse[0].id }
+      props: { id: mockMovie.id }
     })
 
     expect(wrapper.html()).toMatchSnapshot()
@@ -32,7 +33,9 @@ describe('MovieDetails', () => {
     const state = useMoviesStore()
     await state.getMoviesData()
 
-    const wrapper = mount(MovieDetails, { props: { id: mockMoviesResponse[0].id } })
+    const wrapper = mount(MovieDetails, { props: { id: mockMovie.id } })
+
+    await nextTick()
 
     expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.text()).not.toContain('LOADING...')

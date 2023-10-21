@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 
 import SearchButton from '@/components/SearchButton.vue'
 import SearchInput from '@/components/SearchInput.vue'
@@ -58,9 +58,24 @@ withDefaults(defineProps<{ msg: string }>(), { msg: 'Find your movie' })
 const appState = useMoviesStore()
 const searchText = ref('')
 
+const searchValue = computed(() => appState.searchValue)
+const searchByValue = computed(() => appState.searchByValue)
+const sortByValue = computed(() => appState.sortByValue)
 onMounted(() => {
-  appState.getMoviesData()
+  if (!appState.movies.length) {
+    appState.getMoviesData()
+  }
 })
+
+watch(
+  [searchValue, searchByValue, sortByValue],
+  ([newSearchValue, newSearchByValue], [prevSearchValue, prevSearchByValue]) => {
+    if (newSearchByValue !== prevSearchByValue && !newSearchValue && !prevSearchValue) {
+      return
+    }
+    appState.getMoviesData()
+  }
+)
 
 const { handleSearch } = useSearch()
 const onSearch = () => handleSearch(searchText.value)
