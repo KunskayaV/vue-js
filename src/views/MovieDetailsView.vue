@@ -19,7 +19,7 @@
         </ResultsList>
       </div>
     </main>
-   <PageFooter />
+    <PageFooter />
   </div>
 </template>
 

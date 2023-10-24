@@ -1,10 +1,10 @@
 <template>
   <div class="title-container">
     <div class="title-wrapper">
-      <span class="movie-title">{{ props.title }}</span>
-      <span class="movie-rating">{{ props.rating }}</span>
+      <span class="movie-title" date-testid="details-title">{{ props.title }}</span>
+      <span class="movie-rating" date-testid="details-rating">{{ props.rating }}</span>
     </div>
-    <span class="movie-genre">{{ props.genre }}</span>
+    <span class="movie-genre" date-testid="details-genre">{{ props.genre }}</span>
   </div>
 </template>
 

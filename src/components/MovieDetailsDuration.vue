@@ -1,16 +1,18 @@
 <template>
   <div class="duration-container">
-    <span>{{ props.year }}</span>
-    <span>{{ minutes }} min</span>
+    <span date-testid="details-year">{{ year }}</span>
+    <span date-testid="details-duration">{{ minutes }} min</span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getDuration } from '@/helpers/getDuration'
+import { getYearFromDate } from '@/helpers/getYearFromDate'
 import { computed } from 'vue'
 
-const props = defineProps<{ year: string; duration: string }>()
+const props = defineProps<{ date: string; duration: string }>()
 
+const year = computed(() => getYearFromDate(props.date))
 const minutes = computed(() => getDuration(props.duration))
 </script>
 

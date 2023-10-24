@@ -3,11 +3,12 @@
 </template>
 
 <script lang="ts" setup>
+import { getYearFromDate } from '../helpers/getYearFromDate'
 import { computed } from 'vue'
 const props = defineProps<{
   date: string
 }>()
-const year = computed(() => new Date(props.date).getFullYear())
+const year = computed(() => getYearFromDate(props.date))
 </script>
 
 <style scoped>

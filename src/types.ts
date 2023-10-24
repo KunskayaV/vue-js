@@ -11,6 +11,6 @@ export type TMovie = {
   storyline: string
   actors: string[]
   imdbRating: number
-  posterUrl: string
+  posterurl: string
   title: string
 }

@@ -7,6 +7,7 @@
     placeholder="Search..."
     :value="modelValue"
     @input="$emit('update:modelValue', ($event?.target as HTMLInputElement)?.value || '')"
+    data-testid="search-input"
   />
 </template>
 

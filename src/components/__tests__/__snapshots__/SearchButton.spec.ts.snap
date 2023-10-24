@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SearchButton > should match snapshot 1`] = `"<button data-v-d2d1fd4d=\\"\\" type=\\"button\\" class=\\"search-button search-button--small\\">Search</button>"`;
+
+exports[`SearchButton > should match snapshot 2`] = `"<button data-v-d2d1fd4d=\\"\\" type=\\"button\\" class=\\"search-button search-button--medium\\">Search</button>"`;
+
+exports[`SearchButton > should match snapshot 3`] = `"<button data-v-d2d1fd4d=\\"\\" type=\\"button\\" class=\\"search-button search-button--large\\">Search</button>"`;

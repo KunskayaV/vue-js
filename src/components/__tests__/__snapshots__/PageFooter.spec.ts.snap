@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageFooter > renders properly 1`] = `"<footer data-v-8ee5c97c=\\"\\" class=\\"page-footer\\"><img data-v-8ee5c97c=\\"\\" alt=\\"Footer logo\\" class=\\"logo\\" src=\\"/src/assets/logo.png\\" width=\\"180\\" height=\\"25\\"></footer>"`;

@@ -1,5 +1,5 @@
 <template>
-  <span class="result-count">{{ count }} movie found</span>
+  <span class="result-count" data-testid="result-count">{{ count }} movie found</span>
 </template>
 
 <script lang="ts" setup>

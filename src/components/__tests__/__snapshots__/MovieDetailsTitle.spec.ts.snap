@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MovieDetailsTitle > should match snapshot 1`] = `
+"<div data-v-8cdb4aee=\\"\\" class=\\"title-container\\">
+  <div data-v-8cdb4aee=\\"\\" class=\\"title-wrapper\\"><span data-v-8cdb4aee=\\"\\" class=\\"movie-title\\" date-testid=\\"details-title\\">Title</span><span data-v-8cdb4aee=\\"\\" class=\\"movie-rating\\" date-testid=\\"details-rating\\">4.2</span></div><span data-v-8cdb4aee=\\"\\" class=\\"movie-genre\\" date-testid=\\"details-genre\\">Drama</span>
+</div>"
+`;
